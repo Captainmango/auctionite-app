@@ -11,7 +11,7 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  CI:
+  test-suite:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -27,8 +27,10 @@ jobs:
       - name: Set up database schema
         run: bin/rails db:schema:load
       # Add or replace test runners here
-      - name: Run tests
-        run: bundle exec rspec
+      - name: Run model tests
+        run: bundle exec rspec spec/models
+      - name: Run mailer tests
+        run: bundle exec rspec spec/mailers
         
   lint:
     runs-on: ubuntu-latest

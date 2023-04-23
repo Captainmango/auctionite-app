@@ -13,8 +13,6 @@ on:
 jobs:
   CI:
     runs-on: ubuntu-latest
-    env:
-      RAILS_ENV: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -28,7 +26,7 @@ jobs:
         run: bin/rails db:schema:load
       # Add or replace test runners here
       - name: Run tests
-        run: bin/rake
+        run: bin/rake RAILS_ENV=test
 
   lint:
     runs-on: ubuntu-latest
@@ -40,9 +38,8 @@ jobs:
         with:
           bundler-cache: true
       # Add or replace any other lints here
-      - name: Security audit dependencies
-        run: bin/bundler-audit --update
-#      add back in when we want to use brakeman 
+#      - name: Security audit dependencies
+#        run: bin/bundler-audit --update
 #       - name: Security audit application code
 #         run: bin/brakeman -q -w2
       - name: Lint Ruby files

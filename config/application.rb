@@ -46,6 +46,7 @@ module AuctioniteApp
       g.test_framework :rspec
       g.helper_specs false
       g.view_specs false
+      g.factory_bot suffix: 'factory'
     end
   end
 end

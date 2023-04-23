@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # The first thing you need to configure is which modules you need in your app.
 # The default is nothing which will include only core features (password encryption, login/logout).
 #
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = [:remember_me, :reset_password]
+Rails.application.config.sorcery.submodules = %i[remember_me reset_password]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -134,7 +136,8 @@ Rails.application.config.sorcery.configure do |config|
   # config.instagram.secret = ""
   # config.instagram.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=instagram"
   # config.instagram.user_info_mapping = {:email => "username"}
-  # config.instagram.access_permissions = ["basic", "public_content", "follower_list", "comments", "relationships", "likes"]
+  # config.instagram.access_permissions =
+  # ["basic", "public_content", "follower_list", "comments", "relationships", "likes"]
   #
   # config.github.key = ""
   # config.github.secret = ""
@@ -225,7 +228,6 @@ Rails.application.config.sorcery.configure do |config|
   # config.line.scope = "profile"
   # config.line.bot_prompt = "normal"
   # config.line.user_info_mapping = {name: 'displayName'}
-
 
   # For information about Discord API
   # https://discordapp.com/developers/docs/topics/oauth2
@@ -563,5 +565,5 @@ Rails.application.config.sorcery.configure do |config|
 
   # This line must come after the 'user config' block.
   # Define which model authenticates with sorcery.
-  config.user_class = "User"
+  config.user_class = 'User'
 end

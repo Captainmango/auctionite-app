@@ -10,6 +10,6 @@ class CreatePhotos < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :photo_index, %i[imageable_type imageable_id]
+    add_index :photos, %i[imageable_type imageable_id]
   end
 end

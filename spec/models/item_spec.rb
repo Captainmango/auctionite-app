@@ -3,5 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'has photos' do
+    item = create(:item, :with_photos, photo_count: 2)
+    expect(item.photos.count).to be(2)
+  end
 end

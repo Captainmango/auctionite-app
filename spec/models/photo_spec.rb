@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Photo, type: :model do
-  test 'users own photos' do
-    photo = create(:photo)
-
-    e
+  it 'users own items with photos' do
+    user = create(:user, :with_item_photos)
+    expect(user.uploaded_photos.count).to be(1)
+    expect(user.items.count).to be(1)
+    expect(user.items.first.photos.count).to be(1)
   end
 end

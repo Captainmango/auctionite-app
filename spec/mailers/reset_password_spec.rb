@@ -3,5 +3,5 @@
 require 'rails_helper'
 
 RSpec.describe ResetPasswordMailer, type: :mailer do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pending 'Will implement when we get to password reset'
 end

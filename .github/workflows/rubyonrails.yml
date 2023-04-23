@@ -11,7 +11,7 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  test-suite:
+  unit-tests:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -31,7 +31,7 @@ jobs:
         run: bundle exec rspec spec/models
       - name: Run mailer tests
         run: bundle exec rspec spec/mailers
-        
+
   lint:
     runs-on: ubuntu-latest
     steps:

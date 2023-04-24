@@ -1,5 +1,5 @@
 # README
-[![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)[![Rails Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rails.rubystyle.guide)
+[![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)[![Rails Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rails.rubystyle.guide) [![Ruby on Rails CI](https://github.com/Captainmango/auctionite-app/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/Captainmango/auctionite-app/actions/workflows/rubyonrails.yml)
 
 ## Auctionite
 ### Usage

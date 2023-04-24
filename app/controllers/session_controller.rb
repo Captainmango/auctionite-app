@@ -20,6 +20,7 @@ class SessionController < ApplicationController
 
   def sign_out
     logout
+    redirect_to landing_page_path, notice: 'Logged out successfully'
   end
 
   private

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'registration', action: 'register', controller: 'registration', as: 'sign_up'
   get 'sign-in', action: 'new', controller: 'session', as: 'new_session'
   post 'sign-in', action: 'sign_in', controller: 'session', as: 'sign_in'
-  post 'sign-out', action: 'sign_out', controller: 'session', as: 'sign_out'
+  get 'sign-out', action: 'sign_out', controller: 'session', as: 'sign_out'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

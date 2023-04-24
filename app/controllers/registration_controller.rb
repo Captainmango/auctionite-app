@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 class RegistrationController < ApplicationController
-  def new; end
+  def new
+    @user = User.new
+  end
 
   def register
     @user = User.new(new_user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_url, success: 'Account created successfully' }
+        format.html { redirect_to landing_page_path, success: 'Account created successfully' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -18,6 +20,6 @@ class RegistrationController < ApplicationController
   private
 
   def new_user_params
-    params.permit(:email, :password)
+    params.require(:user).permit(:email, :password)
   end
 end

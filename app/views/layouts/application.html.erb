@@ -13,7 +13,25 @@
 
   <body>
     <main>
-      <section>
+      <figure>
+        <%= image_tag 'cover.png', style: 'height: 300px;' %>
+      </figure>
+      <nav>
+        <ul>
+          <li>
+            <%= link_to 'Home', '/' %>
+          </li>
+          <% if !current_user %>
+          <li>
+            <%= link_to 'Register', new_user_path %>
+          </li>
+            <li>
+            <%= link_to 'Login', new_user_path %>
+          </li>
+          <% end %>
+        </ul>
+      </nav>
+      <section style="text-align: center;">
         <article>
           <%= yield %>
         </article>

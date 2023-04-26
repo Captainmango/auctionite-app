@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :items
   root 'landing#index', as: 'landing_page'
 
   get 'registration', action: 'new', controller: 'registration', as: 'new_user'

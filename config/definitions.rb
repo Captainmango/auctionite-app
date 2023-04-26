@@ -119,6 +119,7 @@
 #     extend ActiveRecord::FinderMethods
 #     extend ActiveRecord::Associations::ClassMethods
 #     extend ActiveRecord::Inheritance::ClassMethods
+#     extend ActiveModel::Validations::ClassMethods
 #     include ActiveRecord::Persistence
 #     include ActiveModel::Model
 #     require 'abbrev'

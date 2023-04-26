@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AuctioniteApp</title>
+    <title>Auctionite</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css-1.5.5.min.css"/>
     <%= csrf_meta_tags %>
@@ -14,30 +14,11 @@
   <body>
     <main>
       <figure>
-        <%= image_tag 'cover.png', style: 'height: 300px;' %>
+        <%= image_tag 'default-monochrome.svg', style: 'height: 150px;' %>
       </figure>
-      <nav>
-        <ul>
-          <li>
-            <%= link_to 'Home', '/' %>
-          </li>
-          <% if !current_user %>
-            <li>
-              <%= link_to 'Register', new_user_path %>
-            </li>
-            <li>
-              <%= link_to 'Login', new_session_path %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to 'Auctions', landing_page_path %>
-            </li>
-            <li>
-              <%= link_to 'Logout', sign_out_path, data: { turbo_method: :delete } %>
-            </li>
-          <% end %>
-        </ul>
-      </nav>
+
+      <%= render 'layouts/navbar' %>
+
       <section style="text-align: center;">
         <article>
           <%= yield %>

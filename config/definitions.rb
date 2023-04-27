@@ -12,6 +12,7 @@
 #     include ActionController::MimeResponds
 #     extend ActiveSupport::Callbacks::ClassMethods
 #     extend AbstractController::Callbacks::ClassMethods
+#     include Sorcery::Controller::InstanceMethods
 #   end
 #   class ActiveRecord::Base
 #     extend ActiveRecord::QueryMethods

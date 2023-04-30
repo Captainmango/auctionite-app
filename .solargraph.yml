@@ -1,5 +1,5 @@
 include:
-  - "app/**/*.rb"
+  - "app/**/*"
   - "lib/**/*.rb"
   - "config/**/*.rb"
 exclude:

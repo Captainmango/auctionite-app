@@ -10,9 +10,16 @@
       </ul>
     </div>
   <% end %>
+    <fieldset>
+      <%= form.label :name, 'Name' %>
+      <%= form.text_field :name %>
 
-  
+      <%= form.label :description, 'Description' %>
+      <%= form.text_area :description %>
 
+      <%= form.label :starting_price, 'Starting price' %>
+      <%= form.number_field :starting_price, step: 0.01 %>
+    </fieldset>
   <div>
     <%= form.submit %>
   </div>

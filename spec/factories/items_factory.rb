@@ -17,5 +17,9 @@ FactoryBot.define do
         item.reload
       end
     end
+
+    trait :without_starting_price do
+      starting_price { nil }
+    end
   end
 end

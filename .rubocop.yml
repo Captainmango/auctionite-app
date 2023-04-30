@@ -23,5 +23,9 @@ Metrics/AbcSize:
 Metrics/MethodLength:
   Enabled: false
 
+AllCops:
+  Exclude:
+    - 'app/models/concerns/soft_deletable.rb'
+
 
 

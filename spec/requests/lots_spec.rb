@@ -19,11 +19,16 @@ RSpec.describe '/lots', type: :request do
   # Lot. As you add validations to Lot, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    build(:lot, :with_live_dates).attributes
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    {
+      item_id: nil,
+      notes: 'this is some test stuff',
+      live_from: nil,
+      live_to: nil
+    }
   end
 
   describe 'GET /index' do
@@ -88,14 +93,18 @@ RSpec.describe '/lots', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        {
+          item_id: create(:item).id
+        }
       end
 
       it 'updates the requested lot' do
         lot = Lot.create! valid_attributes
+
         patch lot_url(lot), params: { lot: new_attributes }
         lot.reload
-        skip('Add assertions for updated state')
+
+        expect(lot.item.id).to match(new_attributes[:item_id])
       end
 
       it 'redirects to the lot' do

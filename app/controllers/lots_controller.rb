@@ -66,6 +66,6 @@ class LotsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lot_params
-    params.fetch(:lot, {})
+    params.require(:lot).permit(:item_id, :notes, :live_from, :live_to)
   end
 end

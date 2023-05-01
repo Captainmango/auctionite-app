@@ -6,7 +6,12 @@ class LotsController < ApplicationController
 
   # GET /lots or /lots.json
   def index
+    @lots = Lot.for_user(current_user.id)
+  end
+
+  def live_index
     @lots = Lot.live
+    render :index
   end
 
   # GET /lots/1 or /lots/1.json
@@ -23,6 +28,7 @@ class LotsController < ApplicationController
   # POST /lots or /lots.json
   def create
     @lot = Lot.new(lot_params)
+    @lot.owner = current_user
 
     respond_to do |format|
       if @lot.save

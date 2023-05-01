@@ -11,8 +11,10 @@
     </div>
   <% end %>
   <fieldset>
-    <%= form.label :item_id, 'Item' %>
-    <%= form.select :item_id, items %>
+    <% if new_lot?(lot) %>
+      <%= form.label :item_id, 'Item' %>
+      <%= form.select :item_id, items %>
+    <% end %>
 
     <%= form.label :notes, 'Notes' %>
     <%= form.text_area :notes %>
@@ -20,7 +22,7 @@
     <%= form.label :live_from, 'Live from' %>
     <%= form.datetime_local_field :live_from %>
 
-    <%= form.label :live_to, 'Live from' %>
+    <%= form.label :live_to, 'Live to' %>
     <%= form.datetime_local_field :live_to %>
   </fieldset>
 

@@ -2,6 +2,8 @@
 
 Rails.application.routes.draw do
   resources :lots
+  get 'auctions', to: 'lots#live_index', as: 'live_lots'
+
   resources :items
   root 'landing#index', as: 'landing_page'
 

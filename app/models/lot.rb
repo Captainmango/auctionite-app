@@ -8,9 +8,9 @@ class Lot < ApplicationRecord
 
   validates :user_id, presence: true
   # rubocop:disable Rails/UniqueValidationWithoutIndex
-  validates :item_id, uniqueness: { scope: :item_id }
+  validates :item_id, uniqueness: { scope: %i[item_id deleted_at] }
   # rubocop:enable Rails/UniqueValidationWithoutIndex
-  validates :live_from, comparison: { greater_than: :live_to }, allow_blank: true
+  validates :live_from, comparison: { less_than: :live_to }, allow_blank: true
 
   # Lots that have a live from that is less than now and a live to that is greater than now
   scope :live, -> { where('live_from <= ?', Time.current).where('live_to >= ?', Time.current) }

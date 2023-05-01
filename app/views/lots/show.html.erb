@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @lot %>
+
+<div>
+  <% if owned_by_current_user(@lot) %>
+    <%= link_to "Edit this lot", edit_lot_path(@lot) %>
+    <%= button_to "Destroy this lot", @lot, method: :delete %>
+    <%= link_to "Back to lots", lots_path %>
+  <% else %>
+    <%= link_to "Back to lots", lots_path %>
+  <% end %>
+</div>

@@ -31,6 +31,11 @@ RSpec.describe '/lots', type: :request do
     }
   end
 
+  before :all do
+    user = create(:user)
+    login_user(user, 'password', sign_in_path)
+  end
+
   describe 'GET /index' do
     it 'renders a successful response' do
       Lot.create! valid_attributes

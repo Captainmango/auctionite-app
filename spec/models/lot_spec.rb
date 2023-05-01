@@ -9,7 +9,7 @@ RSpec.describe Lot, type: :model do
   end
 
   it 'only returns live when scope is used' do
-    create(:lot, live_from: Time.new.utc)
+    create(:lot, :live_in_future)
     expect(Lot.live.count).to be_equal(0)
   end
 end

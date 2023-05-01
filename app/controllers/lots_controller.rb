@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class LotsController < ApplicationController
+  before_action :require_login
   before_action :set_lot, only: %i[show edit update destroy]
-  before_action :set_user_items, only: %i[edit new]
+  before_action :set_user_items, only: %i[edit new create update]
 
   # GET /lots or /lots.json
   def index

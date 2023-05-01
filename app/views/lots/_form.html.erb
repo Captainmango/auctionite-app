@@ -11,10 +11,10 @@
     </div>
   <% end %>
   <fieldset>
-    <% if new_lot?(lot) %>
+
       <%= form.label :item_id, 'Item' %>
       <%= form.select :item_id, items %>
-    <% end %>
+
 
     <%= form.label :notes, 'Notes' %>
     <%= form.text_area :notes %>

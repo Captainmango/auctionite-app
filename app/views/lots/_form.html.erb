@@ -10,6 +10,19 @@
       </ul>
     </div>
   <% end %>
+  <fieldset>
+    <%= form.label :item_id, 'Item' %>
+    <%= form.select :item_id, items %>
+
+    <%= form.label :notes, 'Notes' %>
+    <%= form.text_area :notes %>
+
+    <%= form.label :live_from, 'Live from' %>
+    <%= form.datetime_local_field :live_from %>
+
+    <%= form.label :live_to, 'Live from' %>
+    <%= form.datetime_local_field :live_to %>
+  </fieldset>
 
   <div>
     <%= form.submit %>

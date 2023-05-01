@@ -2,7 +2,12 @@
 
 FactoryBot.define do
   factory :lot do
-    item_id { create(:item).id }
+    transient do
+      item { create(:item) }
+    end
+
+    item_id { item.id }
+    user_id { item.owner.id }
     notes { 'these are some test notes' }
 
     trait :with_live_dates do

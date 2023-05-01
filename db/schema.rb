@@ -26,13 +26,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_190602) do
 
   create_table "lots", force: :cascade do |t|
     t.integer "item_id", null: false
+    t.integer "user_id", null: false
     t.text "notes"
     t.datetime "live_from"
     t.datetime "live_to"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_lots_on_item_id", unique: true
+    t.index ["item_id"], name: "index_lots_on_item_id"
+    t.index ["user_id"], name: "index_lots_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|

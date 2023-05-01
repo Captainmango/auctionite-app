@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_190602) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_lots_on_item_id"
+    t.index ["item_id", "deleted_at"], name: "index_lots_on_item_id_and_deleted_at", unique: true
     t.index ["user_id"], name: "index_lots_on_user_id"
   end
 

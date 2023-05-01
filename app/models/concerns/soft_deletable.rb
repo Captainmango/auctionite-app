@@ -3,6 +3,7 @@
 # Mixin for soft deleting models. Adds the scopes needed and a restore method so that we can bring
 # models back if we want. Overrides the destroy and delete methods. The only way to hard delete a model
 # with the mixin is via direct DB access.
+# @!attribute
 module SoftDeletable
   extend ActiveSupport::Concern
 
@@ -16,6 +17,7 @@ module SoftDeletable
   def delete
     # rubocop:disable Rails/SkipsModelValidations
     update_column :deleted_at, Time.current if has_attribute? :deleted_at
+    update_column :updated_at, Time.current if has_attribute? :updated_at
     # rubocop:enable Rails/SkipsModelValidations
   end
 

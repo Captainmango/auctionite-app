@@ -11,7 +11,7 @@ FactoryBot.define do
       end
 
       after(:create) do |user, eval|
-        item = create(:item, user:)
+        item = create(:item, owner: user)
         create_list(:photo, eval.photo_count, imageable_id: item.id, imageable_type: 'Item', uploader_id: user.id)
       end
     end

@@ -7,9 +7,7 @@ class Lot < ApplicationRecord
   belongs_to :owner, class_name: 'User', foreign_key: :user_id, inverse_of: :lots
 
   validates :user_id, presence: true
-  # rubocop:disable Rails/UniqueValidationWithoutIndex
   validates :item_id, uniqueness: { scope: %i[item_id deleted_at] }
-  # rubocop:enable Rails/UniqueValidationWithoutIndex
   validates :live_from, comparison: { less_than: :live_to }, allow_blank: true
 
   # Lots that have a live from that is less than now and a live to that is greater than now

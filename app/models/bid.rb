@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class Bid < ApplicationRecord
-  inlcude MoneyAware
+  include MoneyAware
 
   belongs_to :user
   belongs_to :lot
 
-  validates :user_id, :lot_id, :amount, presense: true
+  validates :user_id, :lot_id, :amount, presence: true
   validates :amount, numericality: { only_integer: true }
 
   def amount

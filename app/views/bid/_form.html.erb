@@ -1,0 +1,5 @@
+<%= form_with(model: lot, url: "/lots/#{lot.id}/bid", method: :post) do |form| %>
+    <%= form.label :amount %>
+    <%= form.number_field :amount, step: 0.01 %>
+    <%= form.submit 'Bid' %>
+<% end %>

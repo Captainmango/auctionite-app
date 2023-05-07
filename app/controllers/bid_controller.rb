@@ -4,7 +4,7 @@ class BidController < ApplicationController
   before_action set_lot only: [:place]
 
   def place
-    @lot.bids.create
+    
   end
 
   private

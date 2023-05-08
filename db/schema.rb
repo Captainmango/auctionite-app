@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_075417) do
   enable_extension "plpgsql"
 
   create_table "bids", force: :cascade do |t|
-    t.datetime "timestamp", default: "2023-05-02 08:11:54"
+    t.datetime "timestamp", default: -> { "CURRENT_TIMESTAMP" }
     t.integer "user_id", null: false
     t.integer "lot_id", null: false
     t.integer "amount", null: false
@@ -46,17 +46,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_075417) do
     t.datetime "updated_at", null: false
     t.index ["item_id", "deleted_at"], name: "index_lots_on_item_id_and_deleted_at", unique: true
     t.index ["user_id"], name: "index_lots_on_user_id"
-  end
-
-  create_table "photos", force: :cascade do |t|
-    t.string "imageable_type", null: false
-    t.integer "imageable_id", null: false
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "uploader_id"
-    t.index ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id"
-    t.index ["uploader_id"], name: "index_photos_on_uploader_id"
   end
 
   create_table "users", force: :cascade do |t|

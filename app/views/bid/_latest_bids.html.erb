@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                User
+            </th>
+            <th>
+                Amount
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% bids.each do |bid| %>
+        <tr>
+            <td>
+                <%= bid.user.email %>
+            </td>
+            <td>
+                <%= bid.amount %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

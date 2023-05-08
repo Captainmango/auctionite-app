@@ -3,10 +3,22 @@
 require 'rails_helper'
 
 RSpec.describe 'Bids', type: :request do
-  describe 'GET /place' do
+  describe 'POST /lot/:id/bid' do
+    before :all do
+      user = create(:user)
+      login_user(user, 'password', sign_in_path)
+    end
+
+    let(:lot) { create(:lot) }
     it 'returns http success' do
-      get '/bid/place'
-      expect(response).to have_http_status(:success)
+      post "/lots/#{lot.id}/bid", params: { bid: { amount: 50 } }
+      expect(response).to be_successful
+    end
+
+    it 'creates a bid for the logged in user' do
+      expect do
+        post "/lots/#{lot.id}/bid", params: { bid: { amount: 50 } }
+      end.to change(Bid, :count).by(1)
     end
   end
 end

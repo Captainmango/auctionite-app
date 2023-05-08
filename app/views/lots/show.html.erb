@@ -1,4 +1,7 @@
 <p style="color: green"><%= notice %></p>
+<aside>
+  <%= render 'bid/latest_bids', bids: @bids %>
+</aside>
 
 <%= render @lot %>
 
@@ -12,3 +15,4 @@
     <%= link_to "Back to lots", lots_path %>
   <% end %>
 </div>
+

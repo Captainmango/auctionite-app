@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class BidController < ApplicationController
+  before_action :require_login
   before_action :set_lot, only: [:place]
 
   def place
-    @lot.domain_tap { |lot| lot.bid(bid_params['amount'], current_user.id) }
+    @lot.domain_tap { |lot| lot.bid(bid_amount, current_user.id) }
   end
 
   private
@@ -13,7 +14,7 @@ class BidController < ApplicationController
     @lot = Lot.find(params.fetch(:lot_id))
   end
 
-  def bid_params
-    params.require(:bid).permit(:amount)
+  def bid_amount
+    params.dig(:lot, :amount) || 0
   end
 end

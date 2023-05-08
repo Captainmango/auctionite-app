@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   resources :lots do
-    post 'bid', to: 'bid#place', as: 'bid_lot'
+    post 'bid', to: 'bid#place'
   end
 
   get 'auctions', to: 'lots#live_index', as: 'live_lots'

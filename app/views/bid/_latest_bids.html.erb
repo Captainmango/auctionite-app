@@ -16,7 +16,7 @@
                 <%= bid.user.email %>
             </td>
             <td>
-                <%= bid.amount %>
+                <%= number_to_currency(bid.amount, unit: '£')%>
             </td>
         </tr>
         <% end %>

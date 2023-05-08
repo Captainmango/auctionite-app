@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :lots
+  resources :lots do
+    post 'bid', to: 'bid#place'
+  end
+
   get 'auctions', to: 'lots#live_index', as: 'live_lots'
 
   resources :items

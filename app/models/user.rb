@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :uploaded_photos, inverse_of: 'uploader', class_name: 'Photo',
                              foreign_key: 'uploader_id', dependent: :nullify
   has_many :lots, through: :items
+  has_many :bids, dependent: nil
 end

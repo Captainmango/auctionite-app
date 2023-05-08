@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   validates :starting_price, numericality: { greater_than_or_equal_to: 1 }
 
   def starting_price
-    price_to_human(self[:starting_price]) || self[:starting_price]
+    price_to_human(self[:starting_price])
   end
 
   def starting_price=(price)

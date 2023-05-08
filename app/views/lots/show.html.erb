@@ -1,4 +1,7 @@
 <p style="color: green"><%= notice %></p>
+<aside>
+  <%= render 'bid/latest_bids', bids: @bids %>
+</aside>
 
 <%= render @lot %>
 
@@ -8,6 +11,8 @@
     <%= button_to "Destroy this lot", @lot, method: :delete %>
     <%= link_to "Back to lots", lots_path %>
   <% else %>
+    <%= render 'bid/form', lot: @lot %>
     <%= link_to "Back to lots", lots_path %>
   <% end %>
 </div>
+

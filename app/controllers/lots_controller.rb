@@ -16,7 +16,9 @@ class LotsController < ApplicationController
   end
 
   # GET /lots/1 or /lots/1.json
-  def show; end
+  def show
+    @bids = @lot.bids.order(amount: :desc).limit(5)
+  end
 
   # GET /lots/new
   def new

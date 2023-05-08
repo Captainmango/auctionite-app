@@ -2,9 +2,13 @@
 
 class Lot < ApplicationRecord
   include SoftDeletable
+  include HasDomainObject
+
+  uses_domain_object :lot_domain_object
 
   belongs_to :item
   belongs_to :owner, class_name: 'User', foreign_key: :user_id, inverse_of: :lots
+  has_many :bids, dependent: nil
 
   validates :user_id, presence: true
   validates :item_id, uniqueness: { scope: %i[item_id deleted_at] }

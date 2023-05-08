@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class BidController < ApplicationController
-  before_action set_lot only: [:place]
+  before_action :set_lot, only: [:place]
 
   def place
-    @lot.domain_tap(:LotDomainObject) { |lot| lot.bid(bid_params['amount'], current_user.id) }
+    @lot.domain_tap { |lot| lot.bid(bid_params['amount'], current_user.id) }
   end
 
   private

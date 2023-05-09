@@ -22,11 +22,11 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params)
-    @item[:user_id] = current_user.id
+    @item = Item.new(item_params).tap { |item| item.user_id = current_user.id }
 
     respond_to do |format|
       if @item.save
+        @item.images.attach(item_params[:images])
         format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
@@ -39,6 +39,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1 or /items/1.json
   def update
     respond_to do |format|
+      @item.images.attach(item_params[:images])
       if @item.update(item_params)
         format.html { redirect_to item_url(@item), notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
@@ -68,6 +69,6 @@ class ItemsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def item_params
-    params.require(:item).permit(:name, :description, :starting_price)
+    params.require(:item).permit(:name, :description, :starting_price, :images)
   end
 end

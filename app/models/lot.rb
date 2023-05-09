@@ -11,10 +11,10 @@ class Lot < ApplicationRecord
   has_many :bids, dependent: nil
 
   validates :user_id, presence: true
-  validates :item_id, uniqueness: { scope: %i[item_id deleted_at] }
+  validates :item_id, uniqueness: { scope: %i[item_id deleted_at] }, allow_blank: true
   validates :live_from, comparison: { less_than: :live_to }, allow_blank: true
 
   # Lots that have a live from that is less than now and a live to that is greater than now
-  scope :live, -> { where('live_from <= ?', Time.current).where('live_to >= ?', Time.current) }
+  scope :live, -> { where('live_from <= :t OR (live_from <= :t AND live_to >= :t)', { t: Time.current }) }
   scope :for_user, ->(user_id) { where('user_id = ?', user_id) }
 end

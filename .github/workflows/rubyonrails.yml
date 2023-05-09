@@ -60,12 +60,12 @@ jobs:
         with:
           bundler-cache: true
       # Set up Node
-      - name: Install Node and JS dependencies
+      - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 19.x
       # Run yarn install
-      - name: Run install
+      - name: Install dependencies
         uses: borales/actions-yarn@v4
         with:
           cmd: install # will run `yarn install` command
@@ -74,9 +74,9 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: build
-
+      # Set up db schema
       - name: Set up database schema
         run: bin/rails db:schema:load
       # Add or replace test runners here
-      - name: Run model tests
+      - name: Run web request tests
         run: bundle exec rspec spec/requests

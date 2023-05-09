@@ -3,6 +3,7 @@
 class ItemsController < ApplicationController
   before_action :require_login
   before_action :set_item, only: %i[show edit update destroy]
+  after_action :attach_item_images, only: %i[update create]
 
   # GET /items or /items.json
   def index
@@ -26,7 +27,6 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        @item.images.attach(item_params[:images])
         format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
@@ -39,7 +39,6 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1 or /items/1.json
   def update
     respond_to do |format|
-      @item.images.attach(item_params[:images])
       if @item.update(item_params)
         format.html { redirect_to item_url(@item), notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
@@ -55,8 +54,14 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html do
+        @item.images.map(&:purge)
+        redirect_to items_url, notice: 'Item was successfully destroyed.'
+      end
+      format.json do
+        @item.images.map(&:purge)
+        head :no_content
+      end
     end
   end
 
@@ -70,5 +75,9 @@ class ItemsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def item_params
     params.require(:item).permit(:name, :description, :starting_price, :images)
+  end
+
+  def attach_item_images
+    @item.images.attach(item_params[:images])
   end
 end

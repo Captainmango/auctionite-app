@@ -6,11 +6,10 @@
 # run tests and linters.
 name: "Ruby on Rails CI"
 on:
-  workflow_dispatch:
-  # push:
-  #   branches: [ "main" ]
-  # pull_request:
-  #   branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   unit-tests:
     runs-on: ubuntu-latest

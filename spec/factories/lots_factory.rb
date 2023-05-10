@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :lot do
     transient do
-      item { create(:item) }
+      item { create(:item, :with_main_photo) }
     end
 
     user_id { item.owner.id }

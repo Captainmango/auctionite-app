@@ -3,6 +3,7 @@
 class Item < ApplicationRecord
   include MoneyAware
 
+  has_one_attached :main_image
   has_many_attached :images
 
   belongs_to :owner, class_name: 'User', foreign_key: :user_id, inverse_of: :items

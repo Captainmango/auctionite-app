@@ -1,6 +1,5 @@
 # README
-[![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)[![Rails Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rails.rubystyle.guide) [![Ruby on Rails CI](https://github.com/Captainmango/auctionite-app/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/Captainmango/auctionite-app/actions/workflows/rubyonrails.yml)
-
+[![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)[![Rails Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rails.rubystyle.guide) [![CI](https://github.com/Captainmango/auctionite-app/actions/workflows/ci.yml/badge.svg)](https://github.com/Captainmango/auctionite-app/actions/workflows/ci.yml)
 ## Auctionite
 ### Usage
 This project uses a Procfile to handle start up of services for the application. Make sure the Foreman gem is installed [click here](https://github.com/ddollar/foreman). By Running:

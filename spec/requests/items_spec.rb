@@ -70,6 +70,16 @@ RSpec.describe '/items', type: :request do
         end.to change(Item, :count).by(1)
       end
 
+      it 'create attaches a main photo' do
+        expect do
+          valid_attributes[:main_image] = Rack::Test::UploadedFile.new(
+            Rails.root.join('spec/support/stock_images/test_image_2.jpg'), 'image/jpeg'
+          )
+          post items_url, params: { item: valid_attributes }
+        end.to change(Item, :count).by(1)
+        expect(Item.last.main_image.attached?).to be_truthy
+      end
+
       it 'redirects to the created item' do
         post items_url, params: { item: valid_attributes }
         expect(response).to redirect_to(item_url(Item.last))
@@ -102,6 +112,17 @@ RSpec.describe '/items', type: :request do
         item.reload
         expect(item.name).to match(new_attributes['name'])
         expect(item.starting_price).to match(new_attributes['starting_price'])
+      end
+
+      it 'update attaches a main photo' do
+        expect do
+          item = Item.create! valid_attributes
+          valid_attributes[:main_image] = Rack::Test::UploadedFile.new(
+            Rails.root.join('spec/support/stock_images/test_image_1.jpg'), 'image/jpeg'
+          )
+          patch item_url(item), params: { item: valid_attributes }
+        end.to change(Item, :count).by(1)
+        expect(Item.last.main_image.attached?).to be_truthy
       end
 
       it 'redirects to the item' do

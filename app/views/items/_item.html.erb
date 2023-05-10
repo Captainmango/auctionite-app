@@ -1,5 +1,5 @@
 <div id="<%= dom_id item %>">
-<img src="https://picsum.photos/id/9/200" alt="tech image">
+<img src= <%= item_image_url(item) %> alt="tech image">
 
 <p><strong><%= item.name %></strong> costs: <%= number_to_currency(item.starting_price, unit: '£') %></p>
 <p>Listed by: <%= item.owner&.email || 'unknown' %></p>

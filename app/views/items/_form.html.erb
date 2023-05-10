@@ -19,6 +19,12 @@
 
       <%= form.label :starting_price, 'Starting price' %>
       <%= form.number_field :starting_price, step: 0.01 %>
+
+      <%= form.label :main_image %>
+      <%= form.file_field :main_image %>
+
+      <%= form.label :images %>
+      <%= form.file_field :images, multiple: true %>
     </fieldset>
   <div>
     <%= form.submit %>

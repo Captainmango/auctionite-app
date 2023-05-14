@@ -13,7 +13,7 @@ RSpec.describe BidAbility, type: :ability do
     it { is_expected.to be_able_to(:read, bid) }
     it { is_expected.not_to be_able_to(:update, bid) }
     it { is_expected.not_to be_able_to(:destroy, bid) }
-    it { is_expected.not_to be_able_to(:create, create(:bid, user:)) }
+    it { is_expected.not_to be_able_to(:create, bid) }
   end
 
   describe 'Not the owner of the lot being bid on' do
@@ -24,6 +24,6 @@ RSpec.describe BidAbility, type: :ability do
     it { is_expected.to be_able_to(:read, bid) }
     it { is_expected.not_to be_able_to(:update, bid) }
     it { is_expected.not_to be_able_to(:destroy, bid) }
-    it { is_expected.to be_able_to(:create, create(:bid, user:)) }
+    it { is_expected.to be_able_to(:create, bid) }
   end
 end

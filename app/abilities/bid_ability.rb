@@ -7,6 +7,8 @@ class BidAbility
     can :read, Bid
     cannot :update, Bid
     cannot :delete, Bid
-    cannot :create, Bid, lot: { owner: user }
+    can :create, Bid do |bid|
+      bid.lot.owner.id != user.id
+    end
   end
 end

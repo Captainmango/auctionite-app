@@ -7,7 +7,7 @@ module HasDomainObject
     base.extend ClassMethods
 
     def domain_tap(sym_name = nil)
-      yield Object.const_get(sym_name || domain_class_name).new(attributes)
+      yield Object.const_get(sym_name || domain_class_name).new(self)
       self
     end
 

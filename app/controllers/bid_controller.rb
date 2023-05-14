@@ -17,4 +17,8 @@ class BidController < ApplicationController
   def bid_amount
     params.dig(:lot, :amount) || 0
   end
+
+  def current_ability
+    @current_ability ||= BidAbility.new(current_user)
+  end
 end

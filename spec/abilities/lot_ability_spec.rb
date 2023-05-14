@@ -3,7 +3,7 @@
 require 'cancan/matchers'
 require 'rails_helper'
 
-RSpec.describe 'LotAbility', type: :ability do
+RSpec.describe LotAbility, type: :ability do
   subject(:ability) { LotAbility.new(user) }
   describe 'Not the owner of any lots' do
     let(:user) { create(:user) }

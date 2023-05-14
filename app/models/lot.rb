@@ -16,5 +16,5 @@ class Lot < ApplicationRecord
 
   # Lots that have a live from that is less than now and a live to that is greater than now
   scope :live, -> { where('live_from <= :t OR (live_from <= :t AND live_to >= :t)', { t: Time.current }) }
-  scope :for_user, ->(user_id) { where('user_id = ?', user_id) }
+  scope :owned_by_user, ->(user_id) { where('user_id = ?', user_id) }
 end

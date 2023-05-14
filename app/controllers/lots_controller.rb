@@ -7,7 +7,7 @@ class LotsController < ApplicationController
 
   # GET /lots or /lots.json
   def index
-    @lots = Lot.for_user(current_user.id)
+    @lots = Lot.owned_by_user(current_user.id)
   end
 
   def live_index
@@ -80,5 +80,9 @@ class LotsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def lot_params
     params.require(:lot).permit(:item_id, :notes, :live_from, :live_to)
+  end
+
+  def current_ability
+    @current_ability ||= LotAbility.new(current_user)
   end
 end

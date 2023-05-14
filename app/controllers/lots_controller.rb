@@ -30,8 +30,7 @@ class LotsController < ApplicationController
 
   # POST /lots or /lots.json
   def create
-    @lot = Lot.new(lot_params)
-    @lot.owner = current_user
+    @lot = Lot.new(lot_params).tap { |l| l.owner = current_user }
 
     respond_to do |format|
       if @lot.save

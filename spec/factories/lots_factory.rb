@@ -11,7 +11,7 @@ FactoryBot.define do
     notes { 'these are some test notes' }
 
     trait :with_live_dates do
-      live_from { Time.current }
+      live_from { Time.current - 86_400 }
       live_to { Time.current + 172_800 } # live for 2 days
     end
 

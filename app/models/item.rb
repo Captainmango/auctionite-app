@@ -2,9 +2,12 @@
 
 class Item < ApplicationRecord
   include MoneyAware
+  include HasDomainObject
 
   has_one_attached :main_image
   has_many_attached :images
+
+  uses_domain_object :item_domain_object
 
   belongs_to :owner, class_name: 'User', foreign_key: :user_id, inverse_of: :items
   has_one :lot, dependent: :destroy

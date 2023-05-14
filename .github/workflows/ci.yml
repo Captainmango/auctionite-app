@@ -29,6 +29,8 @@ jobs:
       # Add or replace test runners here
       - name: Run model tests
         run: bundle exec rspec spec/models
+      - name: Run ability authorisation tests
+        run: bundle exec rspec spec/abilities
 
   lint:
     runs-on: ubuntu-latest

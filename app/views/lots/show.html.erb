@@ -3,7 +3,9 @@
   <%= render 'bid/latest_bids', bids: @bids %>
 </aside>
 
-<%= render @lot %>
+<div>
+  <%= render @lot %>
+</div>
 
 <div>
   <% if owned_by_current_user(@lot) %>

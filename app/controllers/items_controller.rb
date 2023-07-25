@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
+    # @todo - get items only for logged in user (use current_ability helper for controller)
     @items = Item.all
   end
 

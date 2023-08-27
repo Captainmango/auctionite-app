@@ -28,7 +28,7 @@ RSpec.describe '/items', type: :request do
 
   before :all do
     user = create(:user)
-    login_user(user, 'password', sign_in_path)
+    login_user(user, 'password', users_sign_in_path)
   end
 
   describe 'GET /index' do

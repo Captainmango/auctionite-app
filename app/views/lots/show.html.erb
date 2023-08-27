@@ -1,18 +1,21 @@
-<p style="color: green"><%= notice %></p>
 <aside>
   <%= render 'bid/latest_bids', bids: @bids %>
 </aside>
 
-<%= render @lot %>
+<div>
+  <%= render @lot %>
+</div>
 
 <div>
-  <% if owned_by_current_user(@lot) %>
+  <% if owned_by_current_user(@lot) && !@lot.live? %>
     <%= link_to "Edit this lot", edit_lot_path(@lot) %>
     <%= button_to "Destroy this lot", @lot, method: :delete %>
     <%= link_to "Back to lots", lots_path %>
-  <% else %>
+  <% elsif !owned_by_current_user(@lot) && @lot.live? %>
     <%= render 'bid/form', lot: @lot %>
     <%= link_to "Back to lots", lots_path %>
+  <% else %>
+    <p>This auction has concluded</p>
   <% end %>
 </div>
 

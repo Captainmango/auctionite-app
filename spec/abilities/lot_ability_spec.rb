@@ -16,7 +16,7 @@ RSpec.describe LotAbility, type: :ability do
 
   describe 'Owner of a lot' do
     let(:user) { create(:user) }
-    let(:lot) { create(:lot, :with_live_dates, owner: user) }
+    let(:lot) { create(:lot, :live_in_future, owner: user) }
 
     it { is_expected.to be_able_to(:read, lot) }
     it { is_expected.to be_able_to(:update, lot) }

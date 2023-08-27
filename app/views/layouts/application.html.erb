@@ -18,6 +18,7 @@
         <%= image_tag 'default-monochrome.svg', style: 'height: 100px;' %>
       </figure>
 
+      <%= render 'shared/toast', message: flash[:notice] %>
       <%= render 'layouts/navbar' %>
 
       <section>

@@ -5,7 +5,7 @@ class ItemAbility
 
   def initialize(user)
     # @todo make read and create limited to owners only
-    can %i[read create], Item
+    can :read, Item, owner: user
     can %i[update destroy], Item do |item|
       !item.lot&.live? && item.owner == user
     end

@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   # GET /items or /items.json
   def index
     # @todo - get items only for logged in user (use current_ability helper for controller)
-    @items = Item.all
+    @items = Item.accessible_by(current_ability)
   end
 
   # GET /items/1 or /items/1.json
@@ -81,5 +81,9 @@ class ItemsController < ApplicationController
   def attach_item_images
     @item.main_image.attach(item_params[:main_image])
     @item.images.attach(item_params[:images])
+  end
+
+  def current_ability
+    @current_ability ||= ItemAbility.new(current_user)
   end
 end

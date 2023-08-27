@@ -5,6 +5,8 @@ class LotAbility
 
   def initialize(user)
     can %i[read create], Lot
-    can %i[update destroy], Lot, owner: user
+    can %i[update destroy], Lot do |lot|
+      lot.owner.id == user.id && !lot.live?
+    end
   end
 end

@@ -9,4 +9,19 @@
     <p>
         <%= lot.notes %>
     </p>
+        <aside>
+        <% if lot.live_to %>
+            <p>
+                Lot will finish: <%= lot.live_to %>
+            </p>
+
+            <p>
+                Auction will be live for <%= distance_of_time_in_words(lot.live_to, lot.live_from) %>
+            </p>
+        <% end %>
+
+    </aside>
+    <p>
+        Goes live on: <%= lot.live_from %>
+    </p>
 </div>

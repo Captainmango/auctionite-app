@@ -5,8 +5,7 @@ class BidAbility
 
   def initialize(user)
     can :read, Bid
-    cannot :update, Bid
-    cannot :delete, Bid
+    cannot %i[update delete], Bid
     can :create, Bid do |bid|
       bid.lot.owner.id != user.id
     end

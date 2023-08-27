@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root 'landing#index', as: 'landing_page'
 
   namespace :users, path: '/' do
-    get 'registration', to: 'registration#new', as: 'new_user'
+    get 'registration', to: 'registration#new', as: 'new_registration'
     post 'registration', to: 'registration#register', as: 'sign_up'
     get 'sign-in', to: 'session#new', as: 'new_session'
     post 'sign-in', to: 'session#sign_in', as: 'sign_in'

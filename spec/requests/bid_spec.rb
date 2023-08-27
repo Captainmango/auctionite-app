@@ -17,7 +17,7 @@ RSpec.describe 'Bids', type: :request do
 
     it 'creates a bid for the logged in user' do
       expect do
-        post "/lots/#{lot.id}/bid", params: { bid: { amount: 50 } }
+        post "/lots/#{lot.id}/bid", params: { bid: { amount: 99_999 } }
       end.to change(Bid, :count).by(1)
     end
   end

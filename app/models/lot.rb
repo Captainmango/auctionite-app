@@ -19,6 +19,10 @@ class Lot < ApplicationRecord
   scope :owned_by_user, ->(user_id) { where('user_id = ?', user_id) }
 
   def live?
-    live_from <= Time.now.utc || (live_from <= Time.now.utc && live_to >= Time.now.utc)
+    if live_to && live_from
+      live_from <= Time.now.utc && live_to >= Time.now.utc
+    else
+      live_from <= Time.now.utc
+    end
   end
 end

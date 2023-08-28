@@ -2,9 +2,13 @@
 
 class LotDomainObject < ApplicationDomainObject
   CannotPlaceBid = Class.new(StandardError)
+  BidAmountCannotBeZero = Class.new(StandardError)
+
   uses_model :lot
 
   def bid(amount, user_id)
+    raise BidAmountCannotBeZero if amount.to_f <= 0
+
     highest_bid = bids.order('amount DESC').first
 
     raise CannotPlaceBid if highest_bid && !bid_can_be_placed?(amount, highest_bid, user_id)

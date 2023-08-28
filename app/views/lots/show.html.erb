@@ -11,11 +11,13 @@
     <%= link_to "Edit this lot", edit_lot_path(@lot) %>
     <%= button_to "Destroy this lot", @lot, method: :delete %>
     <%= link_to "Back to lots", lots_path %>
+  <% elsif !@lot.live? %>
+    <p>This auction has concluded</p>
   <% elsif !owned_by_current_user(@lot) && @lot.live? %>
     <%= render 'bid/form', lot: @lot %>
     <%= link_to "Back to lots", lots_path %>
   <% else %>
-    <p>This auction has concluded</p>
+
   <% end %>
 </div>
 

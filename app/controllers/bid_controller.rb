@@ -17,7 +17,7 @@ class BidController < ApplicationController
   end
 
   def bid_amount
-    params.dig(:lot, :amount) || 0
+    params.dig(:bid, :amount) || 0
   end
 
   def current_ability

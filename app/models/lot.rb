@@ -4,6 +4,9 @@ class Lot < ApplicationRecord
   include SoftDeletable
   include HasDomainObject
 
+  # @!method domain_tap
+  #   @yieldparam [LotDomainObject]
+  #   @return [self]
   uses_domain_object :lot_domain_object
 
   belongs_to :item

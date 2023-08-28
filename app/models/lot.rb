@@ -15,7 +15,7 @@ class Lot < ApplicationRecord
   validates :live_from, comparison: { less_than: :live_to }, allow_blank: true
 
   # Lots that have a live from that is less than now and a live to that is greater than now
-  scope :live, -> { where('live_from <= :t OR (live_from <= :t AND live_to >= :t)', { t: Time.current }) }
+  scope :live, -> { where('live_from <= :t AND live_to IS NULL OR (live_from <= :t AND live_to >= :t)', { t: Time.current }) }
   scope :owned_by_user, ->(user_id) { where('user_id = ?', user_id) }
 
   def live?

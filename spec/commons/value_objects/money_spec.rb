@@ -18,4 +18,11 @@ RSpec.describe 'Money', type: :value_object do
       expect { ValueObjects::Money.from_human('abc') }.to raise_error
     end
   end
+
+  describe 'reading money' do
+    it 'presents money to 2 decimal places' do
+      money = ValueObjects::Money.from_human(12.001)
+      expect(money.amount).not_to eq(12.001)
+    end
+  end
 end

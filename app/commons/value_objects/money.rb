@@ -7,6 +7,8 @@ module ValueObjects
     end
 
     def amount
+      raise unless @amount.is_a? Numeric
+
       case @amount
       when Float
         (@amount / 100).round(2)
@@ -14,18 +16,16 @@ module ValueObjects
         (@amount.to_f / 100).round(2)
       end
     rescue StandardError => e
-      Rails.logger.warn("[MoneyAware#price_to_human] tried to convert a non number value. class: #{@amount.class}")
+      Rails.logger.warn('[ValueObjects::Money#amount] Failed to read amount')
       raise e
     end
 
     def self.from_human(number)
-      case number
-      when String then raise
-      else
-        new((number.to_f * 100).round)
-      end
+      raise unless number.is_a? Numeric
+
+      new((number.to_f * 100).round)
     rescue StandardError => e
-      Rails.logger.warn("[MoneyAware#price_from_human] failed to convert value to integer. class: #{number.class}")
+      Rails.logger.warn("[ValueObjects::Money#from_human] failed to convert value. class: #{number.class}")
       raise e
     end
   end

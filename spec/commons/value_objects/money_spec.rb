@@ -25,4 +25,22 @@ RSpec.describe 'Money', type: :value_object do
       expect(money.amount).not_to eq(12.001)
     end
   end
+
+  describe 'comparing money' do
+    it 'can see 2 moneys are equal in value' do
+      m1 = ValueObjects::Money.new(1234)
+      m2 = ValueObjects::Money.new(1234)
+
+      puts m1 == m2
+
+      expect(m1 == m2).to be_truthy
+    end
+
+    it 'can see that one money is more than another' do
+      m1 = ValueObjects::Money.new(1234)
+      m2 = ValueObjects::Money.new(4321)
+
+      expect(m1 <= m2).to be_truthy
+    end
+  end
 end

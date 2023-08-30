@@ -2,31 +2,40 @@
 
 module ValueObjects
   class Money
-    def initialize(amount)
-      @amount = amount
+    attr_reader :value
+
+    # @param amount [Integer] the amount in the lowest denomination (pence, cents etc)
+    def initialize(value)
+      @value = value
     end
 
+    # @return [Float] the amount in a human readble way
     def amount
-      raise unless @amount.is_a? Numeric
+      raise unless @value.is_a? Numeric
 
-      case @amount
+      case @value
       when Float
-        (@amount / 100).round(2)
+        (@value / 100).round(2)
       else
-        (@amount.to_f / 100).round(2)
+        (@value.to_f / 100).round(2)
       end
     rescue StandardError => e
       Rails.logger.warn('[ValueObjects::Money#amount] Failed to read amount')
       raise e
     end
 
-    def self.from_human(number)
-      raise unless number.is_a? Numeric
+    # @param amount [Float] the amount in the lowest denomination (pence, cents etc)
+    def self.from_human(amount)
+      raise unless amount.is_a? Numeric
 
-      new((number.to_f * 100).round)
+      new((amount.to_f * 100).round)
     rescue StandardError => e
-      Rails.logger.warn("[ValueObjects::Money#from_human] failed to convert value. class: #{number.class}")
+      Rails.logger.warn("[ValueObjects::Money#from_human] failed to convert value. class: #{amount.class}")
       raise e
     end
+  end
+
+  def ==(other)
+    other.value == value
   end
 end

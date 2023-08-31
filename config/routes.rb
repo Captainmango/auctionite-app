@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   resources :lots do
     post 'bid', to: 'bid#place'
@@ -17,5 +19,7 @@ Rails.application.routes.draw do
     post 'sign-in', to: 'session#sign_in', as: 'sign_in'
     delete 'sign-out', to: 'session#sign_out', as: 'sign_out'
   end
+
+  mount Sidekiq::Web => '/sidekiq'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end

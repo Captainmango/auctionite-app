@@ -1,3 +1,2 @@
 web: unset PORT && bin/rails server
 js: yarn build --watch
-db: docker compose -f compose-pg-only.yml up

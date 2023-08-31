@@ -2,15 +2,15 @@
 [![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)[![Rails Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rails.rubystyle.guide) [![CI](https://github.com/Captainmango/auctionite-app/actions/workflows/ci.yml/badge.svg)](https://github.com/Captainmango/auctionite-app/actions/workflows/ci.yml)
 ## Auctionite
 ### Usage
-This project uses a Procfile to handle start up of services for the application. Make sure the Foreman gem is installed [click here](https://github.com/ddollar/foreman). By Running:
+This project uses a Procfile to handle building assets for the application. Make sure the Foreman gem is installed [click here](https://github.com/ddollar/foreman). By Running:
 ```bash
 $ foreman start -f Procfile.dev
 ```
 
-The database and the Rails application will start. If the database does not exist yet, you will likely see an error. The DB is created using Docker Compose. By running:
+The Rails application will start. If the database does not exist yet, you will likely see an error. The DB is created using Docker Compose. By running:
 
 ```bash
-$ docker compose -f compose-pg-only.yml up -d
+$ docker compose up -d
 ```
 
 The database will be built. Then, once completed, run `rails db:create` to create the database. In test, the project uses SQLite3 rather than Postgres. This is so that we have tests that can be run without the need of a docker container running the DB.
@@ -22,6 +22,9 @@ $ rails db:schema:load
 
 We prefer this over the normal `rails db:migrate` as it simply makes the database match the schema file rather than running migrations. This is safer overall and means that all projects start off with the same database without much fuss.
 
+The compose file will also start a Redis server and a Sidekiq worker.
+> The compose file is for dev purposes only.
+
 ### Configuration
 
 The app requires a `.env` file to be placed in the root in order to correctly build the configuration for accessing the database. The docker compose file uses this too, so place any vars you need in here. The required ones are:
@@ -29,9 +32,11 @@ The app requires a `.env` file to be placed in the root in order to correctly bu
 ```
 PG_DB_USER=abc
 PG_DB_PASSWORD=123
+RAILS_ENV=DEVELOPMENT
+REDIS_URL_SIDEKIQ=redis://redis:6379/12
 ```
 
-These can be whatever when running locally as Docker will create the database with those credentials.
+The PG_DB_* vars can be whatever when running locally as Docker will create the database with those credentials.
 
 ### Tests
 

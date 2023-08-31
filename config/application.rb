@@ -35,7 +35,6 @@ module AuctioniteApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-    config.active_job.queue_adapter = :sidekiq
 
     # Makes generators spit out code that doesn't trigger cops
     config.generators.after_generate do |files|

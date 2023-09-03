@@ -1,6 +1,6 @@
 FROM ruby:3.1.4-alpine
 
-RUN apk update && apk add bash build-base nodejs postgresql-dev tzdata
+RUN apk update && apk add bash build-base nodejs postgresql-dev tzdata vips imagemagick
 
 RUN mkdir /project
 WORKDIR /project

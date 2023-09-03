@@ -2,12 +2,12 @@
 
 # Will likely be running in a cluster on prod so only use envvar if there
 
-if Rails.env.production?
+if ENV.key?('REDIS_URL_SIDEKIQ')
   Sidekiq.configure_server do |config|
-    config.redis = { url: ENV.fetch('REDIS_URL_SIDEKIQ', '127.0.0.1:6379') }
+    config.redis = { url: ENV.fetch('REDIS_URL_SIDEKIQ') }
   end
 
   Sidekiq.configure_client do |config|
-    config.redis = { url: ENV.fetch('REDIS_URL_SIDEKIQ', '127.0.0.1:6379') }
+    config.redis = { url: ENV.fetch('REDIS_URL_SIDEKIQ') }
   end
 end

@@ -76,6 +76,7 @@ GEM
     builder (3.2.4)
     cancancan (3.5.0)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     database_cleaner-active_record (2.1.0)
       activerecord (>= 5.a)
@@ -204,6 +205,8 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.8.4)
+    redis-client (0.16.0)
+      connection_pool
     regexp_parser (2.7.0)
     reline (0.3.3)
       io-console (~> 0.5)
@@ -247,6 +250,11 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    sidekiq (7.1.2)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -323,6 +331,7 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.3)
   rspec-rails (~> 6.0.0)
   rubocop-rails
+  sidekiq (~> 7.1.2)
   solargraph
   solargraph-rails
   sorcery

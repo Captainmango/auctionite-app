@@ -22,11 +22,11 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV.fetch('PG_DB_USER') {'admin'} %>
   password: <%= ENV.fetch('PG_DB_PASSWORD') {'admin'} %>
-  host: 127.0.0.1
 
 development:
   <<: *default
   database: auctionite_app_development
+  host: <%= ENV.fetch('PG_DB_HOST') { '127.0.0.1' } %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

@@ -31,8 +31,6 @@ RSpec.describe 'Money', type: :value_object do
       m1 = ValueObjects::Money.new(1234)
       m2 = ValueObjects::Money.new(1234)
 
-      puts m1 == m2
-
       expect(m1 == m2).to be_truthy
     end
 

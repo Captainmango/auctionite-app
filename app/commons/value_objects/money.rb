@@ -2,6 +2,8 @@
 
 module ValueObjects
   class Money
+    include Comparable
+
     attr_reader :value
 
     # @param amount [Integer] the amount in the lowest denomination (pence, cents etc)
@@ -33,9 +35,13 @@ module ValueObjects
       Rails.logger.warn("[ValueObjects::Money#from_human] failed to convert value. class: #{amount.class}")
       raise e
     end
-  end
 
-  def ==(other)
-    other.value == value
+    def ==(other)
+      other.value == value
+    end
+
+    def <=>(other)
+      value <=> other.value
+    end
   end
 end

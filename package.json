@@ -5,6 +5,7 @@
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.3.0",
     "esbuild": "^0.17.16",
+    "mjml": "^4.14.1",
     "stimulus-notification": "^2.2.0"
   },
   "scripts": {

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class IsAdminConstraint
-  include UserAware
+  extend UserAware
 
-  def matches?(request)
+  def self.matches?(request)
     user = current_user(request)
     user.present? && user.admin?
   end

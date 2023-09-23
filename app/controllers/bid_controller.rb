@@ -8,6 +8,11 @@ class BidController < ApplicationController
 
   def place
     @lot.domain_tap { |lot| lot.bid(bid_amount, current_user.id) }
+
+    render turbo_stream: turbo_stream.replace(
+      'lots_bids',
+      partial: 'bid/latest_bids'
+    )
   end
 
   private
@@ -17,7 +22,7 @@ class BidController < ApplicationController
   end
 
   def bid_amount
-    params.dig(:bid, :amount) || 0
+    params.dig(:lot, :amount) || 0
   end
 
   def current_ability

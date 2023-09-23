@@ -7,4 +7,5 @@ class Bid < ApplicationRecord
 
   validates :user_id, :lot_id, :amount, presence: true
   validates :amount, numericality: { only_integer: true }
+  scope :latest, -> { order(amount: :desc).limit(5) }
 end

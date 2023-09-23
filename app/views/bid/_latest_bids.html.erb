@@ -1,24 +1,26 @@
-<table>
-    <thead>
-        <tr>
-            <th>
-                User
-            </th>
-            <th>
-                Amount
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <% bids.each do |bid| %>
-        <tr>
-            <td>
-                <%= bid.user.email %>
-            </td>
-            <td>
-                <%= number_to_currency(bid.amount, unit: '£')%>
-            </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+<turbo-frame id='lots_bids'>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    User
+                </th>
+                <th>
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @lot.bids.latest.each do |bid| %>
+            <tr>
+                <td>
+                    <%= bid.user.email %>
+                </td>
+                <td>
+                    <%= number_to_currency(bid.amount, unit: '£')%>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</turbo_stream>

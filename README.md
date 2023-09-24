@@ -39,6 +39,8 @@ The app requires a `.env` file to be placed in the root in order to correctly bu
 PG_DB_USER=abc
 PG_DB_PASSWORD=123
 RAILS_ENV=development
+EMAIL_USER=test@test.com
+EMAIL_PASS=password
 ```
 
 The PG_DB_* vars can be whatever when running locally as Docker will create the database with those credentials. The Redis instance will be auto-connected to as everything looks for redis running locally. To start the required backing services, use the command `docker compose up db redis -d`
@@ -51,6 +53,10 @@ REDIS_URL_SIDEKIQ=redis://redis:6379/12
 ```
 
 These, again, are for dev purposes only and are a bit scuffed. Once set, run `docker compose up` to build the app container and the backing services.
+
+### Emails
+
+The application sends emails. In order for this to work, you will need to provide valid details for the SMTP server (Gmail is used in dev). Google's SMTP is simple to use. One gotcha is the password not working for authentication of the application (plain password auth was stopped in May 2022). Instead, you'll need to generate an `App Password`. Use the search on the `Manage your Google account` screen to find this feature.
 
 ### Tests
 

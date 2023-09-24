@@ -1,0 +1,14 @@
+# See link for more deets on options https://github.com/sidekiq-cron/sidekiq-cron#job-properties
+# Name is at the root of the yaml. Rest of props are indented keys (These are converted to JSON)
+# Jobs look like below.
+# my_first_job:
+#  cron: "*/5 * * * *"
+#  class: "HardWorker"
+#  queue: hard_worker
+
+# Delete this when we have our first real cron here
+my_first_job:
+  cron: "*/5 * * * *"
+  class: "RanJob"
+  queue: default
+

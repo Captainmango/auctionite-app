@@ -13,4 +13,5 @@ class User < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :lots, through: :items
   has_many :bids, dependent: nil
+  has_one :address, as: :addressable, dependent: nil
 end

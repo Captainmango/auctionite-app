@@ -21,6 +21,9 @@
             <%= link_to 'My Items', items_path %>
         </li>
         <li>
+            <%= link_to 'Address', addresses_path %>
+        </li>
+        <li>
             <%= link_to 'Logout', users_sign_out_path, data: { turbo_method: :delete } %>
         </li>
         <% end %>

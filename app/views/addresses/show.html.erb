@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render 'addresses/view', address: @address %>
+
+<div>
+  <%= link_to "Edit this address", edit_address_path(@address) %> |
+
+  <%= button_to "Destroy this address", @address, method: :delete %>
+</div>

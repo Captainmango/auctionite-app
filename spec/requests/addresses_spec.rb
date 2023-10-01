@@ -34,14 +34,12 @@ RSpec.describe '/addresses', type: :request do
     }
   end
 
-  before :all do
-    user = create(:user)
-    login_user(user, 'password', users_sign_in_path)
-  end
+  let(:user) { create(:user) }
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      address = create(:address)
+      login_user(user, 'password', users_sign_in_path)
+      address = create(:address, addressable_id: user.id)
       get address_url(address)
       expect(response).to be_successful
     end
@@ -49,6 +47,7 @@ RSpec.describe '/addresses', type: :request do
 
   describe 'GET /new' do
     it 'renders a successful response' do
+      login_user(user, 'password', users_sign_in_path)
       get new_address_url
       expect(response).to be_successful
     end
@@ -56,7 +55,8 @@ RSpec.describe '/addresses', type: :request do
 
   describe 'GET /edit' do
     it 'renders a successful response' do
-      address = create(:address)
+      login_user(user, 'password', users_sign_in_path)
+      address = create(:address, addressable_id: user.id)
       get edit_address_url(address)
       expect(response).to be_successful
     end
@@ -65,12 +65,14 @@ RSpec.describe '/addresses', type: :request do
   describe 'POST /create' do
     context 'with valid parameters' do
       it 'creates a new Address' do
+        login_user(user, 'password', users_sign_in_path)
         expect do
           post addresses_url, params: { address: valid_attributes }
         end.to change(Address, :count).by(1)
       end
 
       it 'redirects to the created address' do
+        login_user(user, 'password', users_sign_in_path)
         post addresses_url, params: { address: valid_attributes }
         expect(response).to redirect_to(address_url(Address.last))
       end
@@ -78,12 +80,14 @@ RSpec.describe '/addresses', type: :request do
 
     context 'with invalid parameters' do
       it 'does not create a new Address' do
+        login_user(user, 'password', users_sign_in_path)
         expect do
           post addresses_url, params: { address: invalid_attributes }
         end.to change(Address, :count).by(0)
       end
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
+        login_user(user, 'password', users_sign_in_path)
         post addresses_url, params: { address: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -99,7 +103,8 @@ RSpec.describe '/addresses', type: :request do
       end
 
       it 'updates the requested address' do
-        address = create(:address)
+        login_user(user, 'password', users_sign_in_path)
+        address = create(:address, addressable_id: user.id)
         patch address_url(address), params: { address: new_attributes }
         address.reload
 
@@ -107,7 +112,8 @@ RSpec.describe '/addresses', type: :request do
       end
 
       it 'redirects to the address' do
-        address = create(:address)
+        login_user(user, 'password', users_sign_in_path)
+        address = create(:address, addressable_id: user.id)
         patch address_url(address), params: { address: new_attributes }
         address.reload
         expect(response).to redirect_to(address_url(address))
@@ -116,7 +122,8 @@ RSpec.describe '/addresses', type: :request do
 
     context 'with invalid parameters' do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        address = create(:address)
+        login_user(user, 'password', users_sign_in_path)
+        address = create(:address, addressable_id: user.id)
         patch address_url(address), params: { address: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -125,14 +132,16 @@ RSpec.describe '/addresses', type: :request do
 
   describe 'DELETE /destroy' do
     it 'destroys the requested address' do
-      address = create(:address)
+      login_user(user, 'password', users_sign_in_path)
+      address = create(:address, addressable_id: user.id)
       expect do
         delete address_url(address)
       end.to change(Address, :count).by(-1)
     end
 
     it 'redirects to the addresses list' do
-      address = create(:address)
+      login_user(user, 'password', users_sign_in_path)
+      address = create(:address, addressable_id: user.id)
       delete address_url(address)
       expect(response).to redirect_to(addresses_url)
     end

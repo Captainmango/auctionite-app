@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @address %>
+<%= render 'addresses/view', address: @address %>
 
 <div>
   <%= link_to "Edit this address", edit_address_path(@address) %> |

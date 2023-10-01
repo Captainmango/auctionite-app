@@ -19,11 +19,19 @@ RSpec.describe '/addresses', type: :request do
   # Address. As you add validations to Address, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    build(:address).attributes
+    {
+      house_no: '23',
+      first_line: 'Hello world',
+      county: 'Testplaceshire',
+      post_code: 'EE3 4RR'
+    }
   end
 
   let(:invalid_attributes) do
-    {}
+    {
+      house_no: nil,
+      post_code: 2222
+    }
   end
 
   before :all do
@@ -33,7 +41,7 @@ RSpec.describe '/addresses', type: :request do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      address = Address.create! valid_attributes
+      address = create(:address)
       get address_url(address)
       expect(response).to be_successful
     end
@@ -48,7 +56,7 @@ RSpec.describe '/addresses', type: :request do
 
   describe 'GET /edit' do
     it 'renders a successful response' do
-      address = Address.create! valid_attributes
+      address = create(:address)
       get edit_address_url(address)
       expect(response).to be_successful
     end
@@ -85,18 +93,21 @@ RSpec.describe '/addresses', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
+        {
+          house_no: '200'
+        }
       end
 
       it 'updates the requested address' do
-        address = Address.create! valid_attributes
+        address = create(:address)
         patch address_url(address), params: { address: new_attributes }
         address.reload
-        skip('Add assertions for updated state')
+
+        expect(address.house_no).to eq('200')
       end
 
       it 'redirects to the address' do
-        address = Address.create! valid_attributes
+        address = create(:address)
         patch address_url(address), params: { address: new_attributes }
         address.reload
         expect(response).to redirect_to(address_url(address))
@@ -105,7 +116,7 @@ RSpec.describe '/addresses', type: :request do
 
     context 'with invalid parameters' do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        address = Address.create! valid_attributes
+        address = create(:address)
         patch address_url(address), params: { address: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -114,14 +125,14 @@ RSpec.describe '/addresses', type: :request do
 
   describe 'DELETE /destroy' do
     it 'destroys the requested address' do
-      address = Address.create! valid_attributes
+      address = create(:address)
       expect do
         delete address_url(address)
       end.to change(Address, :count).by(-1)
     end
 
     it 'redirects to the addresses list' do
-      address = Address.create! valid_attributes
+      address = create(:address)
       delete address_url(address)
       expect(response).to redirect_to(addresses_url)
     end

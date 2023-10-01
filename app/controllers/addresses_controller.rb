@@ -4,9 +4,7 @@ class AddressesController < ApplicationController
   before_action :set_address, only: %i[show edit update destroy]
 
   # GET /addresses/1 or /addresses/1.json
-  def show
-    debugger
-  end
+  def show; end
 
   # GET /addresses/new
   def new
@@ -18,7 +16,9 @@ class AddressesController < ApplicationController
 
   # POST /addresses or /addresses.json
   def create
-    @address = Address.new(address_params)
+    @address = Address.new(address_params).tap do |addr|
+      addr.addressable = current_user
+    end
 
     respond_to do |format|
       if @address.save
@@ -63,7 +63,7 @@ class AddressesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def address_params
-    params.fetch(:address, {})
+    params.require(:address).permit(:house_no, :first_line, :second_line, :county, :post_code)
   end
 
   def current_ability

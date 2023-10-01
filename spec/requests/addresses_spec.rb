@@ -19,19 +19,16 @@ RSpec.describe '/addresses', type: :request do
   # Address. As you add validations to Address, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    build(:address).attributes
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    {}
   end
 
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      Address.create! valid_attributes
-      get addresses_url
-      expect(response).to be_successful
-    end
+  before :all do
+    user = create(:user)
+    login_user(user, 'password', users_sign_in_path)
   end
 
   describe 'GET /show' do

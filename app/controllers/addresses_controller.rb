@@ -4,7 +4,9 @@ class AddressesController < ApplicationController
   before_action :set_address, only: %i[show edit update destroy]
 
   # GET /addresses/1 or /addresses/1.json
-  def show; end
+  def show
+    debugger
+  end
 
   # GET /addresses/new
   def new

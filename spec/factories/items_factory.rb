@@ -13,7 +13,7 @@ FactoryBot.define do
 
     trait :with_main_photo do
       after :create do |item|
-        item.main_image.attach(io: File.open(Rails.root.join('spec/support/stock_images/test_image_1.jpg')),
+        item.main_image.attach(io: File.open('spec/support/stock_images/test_image_1.jpg'),
                                filename: 'test_image_1.jpg',
                                content_type: 'image/jpeg')
       end

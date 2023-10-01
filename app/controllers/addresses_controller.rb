@@ -63,4 +63,8 @@ class AddressesController < ApplicationController
   def address_params
     params.fetch(:address, {})
   end
+
+  def current_ability
+    @current_ability ||= AddressAbility.new(current_user)
+  end
 end

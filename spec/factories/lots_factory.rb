@@ -15,6 +15,11 @@ FactoryBot.define do
       live_to { Time.current + 172_800 } # live for 2 days
     end
 
+    trait :with_live_dates_in_past do
+      live_from { Time.current - 172_800 }
+      live_to { Time.current - 86_400 } # live for 1 day
+    end
+
     trait :live_in_future do
       live_from { Time.current + 172_800 }
       live_to { Time.current + 360_000 } # live for a bit? Just over a day I reckon

@@ -18,7 +18,14 @@ class Lot < ApplicationRecord
   validates :live_from, comparison: { less_than: :live_to }, allow_blank: true
 
   scope :live, lambda {
-    where('(live_from <= :t AND live_to IS NULL) OR (live_from <= :t AND live_to >= :t)', { t: Time.current })
+    where('
+    (live_from <= :t AND live_to IS NULL)
+    OR (live_from <= :t AND live_to >= :t)
+    AND status = "active"', { t: Time.current })
+  }
+
+  scope :complete, lambda {
+    where('live_to <= :t AND status = "active"', { t: Time.current })
   }
   scope :owned_by_user, ->(user_id) { where('user_id = ?', user_id) }
   enum(:status, {

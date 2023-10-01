@@ -25,7 +25,7 @@ class Lot < ApplicationRecord
          active: 'active',
          terminated: 'terminated',
          completed: 'completed'
-       }, default: active)
+       }, default: :active)
 
   def live?
     if live_to && live_from

@@ -8,8 +8,6 @@ services:
       - POSTGRES_PASSWORD=${PG_DB_PASSWORD}
     ports:
       - '5432:5432'
-    networks:
-      - auctionite-net
     volumes:
       - db:/var/lib/postgresql/data
 
@@ -18,8 +16,6 @@ services:
     command: redis-server
     ports:
       - '6379:6379'
-    networks:
-      - auctionite-net
     volumes:
       - 'redis:/data'
 
@@ -29,8 +25,6 @@ services:
       - redis
     build: .
     command: bundle exec sidekiq
-    networks:
-      - auctionite-net
     volumes:
       - '.:/project'
       - '/project/tmp'
@@ -45,8 +39,6 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0' -e ${RAILS_ENV}"
     ports:
       - '3000:${APP_PORT:-3000}'
-    networks:
-      - auctionite-net
     volumes:
       - '.:/project'
     environment:
@@ -56,7 +48,3 @@ volumes:
   db:
     driver: local
   redis:
-
-networks:
-  auctionite-net:
-    driver: host

@@ -6,9 +6,8 @@
 #  class: "HardWorker"
 #  queue: hard_worker
 
-# Delete this when we have our first real cron here
-my_first_job:
-  cron: "*/5 * * * *"
-  class: "RanJob"
+complete_auctions:
+  cron: "*/30 * * * *"
+  class: "CompleteAuctionsJob"
   queue: default
 

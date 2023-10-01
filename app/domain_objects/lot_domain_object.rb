@@ -16,6 +16,16 @@ class LotDomainObject < ApplicationDomainObject
     bids.create(timestamp: Time.now.utc, amount:, user_id:)
   end
 
+  def complete
+    return if live?
+
+    completed!
+  end
+
+  def terminate
+    terminated!
+  end
+
   private
 
   def bid_can_be_placed?(amount, bid, user_id)

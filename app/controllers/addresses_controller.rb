@@ -3,6 +3,16 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: %i[show edit update destroy]
 
+  def index
+    if current_user.address.nil?
+      redirect_to new_address_path, notice: "You don't have an address. Please add one."
+      return
+    end
+
+    @address = current_user.address
+    render :show
+  end
+
   # GET /addresses/1 or /addresses/1.json
   def show; end
 

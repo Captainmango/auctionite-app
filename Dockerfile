@@ -24,8 +24,8 @@ RUN bundle install
 COPY --chown=ruby:ruby package.json *yarn* ./
 RUN yarn install
 
-ARG RAILS_ENV="production"
-ARG NODE_ENV="production"
+ARG RAILS_ENV="development"
+ARG NODE_ENV="development"
 ENV RAILS_ENV="${RAILS_ENV}" \
     NODE_ENV="${NODE_ENV}" \
     PATH="${PATH}:/home/ruby/.local/bin:/node_modules/.bin" \
@@ -33,7 +33,7 @@ ENV RAILS_ENV="${RAILS_ENV}" \
 
 COPY --chown=ruby:ruby . .
 
-RUN if [ "${RAILS_ENV}" != "development" ]; then \
+RUN if [ "${RAILS_ENV}" == "production" ]; then \
   SECRET_KEY_BASE_DUMMY=1 rails assets:precompile; fi
 
 CMD ["bash"]

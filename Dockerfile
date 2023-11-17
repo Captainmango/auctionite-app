@@ -44,7 +44,7 @@ CMD ["bash"]
 FROM ruby:3.1.4-alpine AS app
 LABEL maintainer="Edward Heaver <edward.heaver01@gmail.com>"
 
-WORKDIR /app
+WORKDIR /project
 
 ARG UID=1000
 ARG GID=1000
@@ -52,7 +52,7 @@ ARG GID=1000
 RUN apk update && apk --no-cache add bash build-base nodejs postgresql-dev tzdata vips imagemagick \
     && addgroup -g "${GID}" ruby \
     && adduser -D -u "${UID}" -G ruby ruby \
-    && chown ruby:ruby -R /app
+    && chown ruby:ruby -R /project
 
 USER ruby
 COPY --chown=ruby:ruby bin/ ./bin

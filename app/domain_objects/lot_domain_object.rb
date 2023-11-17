@@ -19,8 +19,9 @@ class LotDomainObject < ApplicationDomainObject
   def complete
     return if live?
 
-    winning_user = bids.order('amount DESC').first.user
-    AuctionCompleteMailer.winner_email(winning_user)
+    winning_user = bids.order('amount DESC').first&.user
+
+    AuctionCompleteMailer.winner_email(winning_user) if winning_user
 
     completed!
   end

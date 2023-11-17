@@ -1,4 +1,23 @@
 version: '3.8'
+
+x-assets: &default-assets
+  build:
+    context: "."
+    target: "assets"
+    args:
+      - "UID=${UID:-1000}"
+      - "GID=${GID:-1000}"
+      - "RAILS_ENV=${RAILS_ENV:-development}"
+      - "NODE_ENV=${NODE_ENV:-development}"
+  env_file:
+    - ".env"
+  profiles: ["assets"]
+  restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+  stop_grace_period: "3s"
+  tty: true
+  volumes:
+    - ".:/project"
+
 services:
   db:
     image: postgres:14.1-alpine
@@ -43,6 +62,15 @@ services:
       - '.:/project'
     environment:
       - REDIS_URL_SIDEKIQ=${REDIS_URL_SIDEKIQ}
+    env_file:
+      - ".env"
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    stop_grace_period: "3s"
+    tty: true
+
+  js:
+    <<: *default-assets
+    command: "yarn build"
 
 volumes:
   db:

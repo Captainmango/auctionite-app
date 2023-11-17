@@ -57,13 +57,13 @@ USER ruby
 COPY --chown=ruby:ruby bin/ ./bin
 RUN chmod 0755 bin/*
 
-ARG RAILS_ENV="production"
+ARG RAILS_ENV="development"
 ENV RAILS_ENV="${RAILS_ENV}" \
     PATH="${PATH}:/home/ruby/.local/bin" \
     USER="ruby"
 
 COPY --chown=ruby:ruby --from=assets /usr/local/bundle /usr/local/bundle
-COPY --chown=ruby:ruby --from=assets /app/public /public
+COPY --chown=ruby:ruby --from=assets /project/public /public
 COPY --chown=ruby:ruby . .
 
 ENTRYPOINT ["/app/bin/entrypoint"]

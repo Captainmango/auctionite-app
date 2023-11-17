@@ -19,7 +19,8 @@ RUN apk update \
 
 USER ruby
 COPY --chown=ruby:ruby Gemfile* ./
-RUN bundle install --without test development
+RUN bundle config set --local without 'test development'
+RUN bundle install
 
 COPY --chown=ruby:ruby package.json *yarn* ./
 RUN yarn install

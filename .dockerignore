@@ -17,6 +17,7 @@ tmp/*
 !.env.example
 config/master.key
 docker-compose.override.yml
+docker-compose.yml
 yarn-error.log
 yarn-debug.log*
 .yarn-integrity

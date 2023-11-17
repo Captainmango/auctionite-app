@@ -48,7 +48,7 @@ WORKDIR /app
 ARG UID=1000
 ARG GID=1000
 
-RUN apk update && apk add bash build-base nodejs postgresql-dev tzdata vips imagemagick \
+RUN apk update && apk --no-cache add bash build-base nodejs postgresql-dev tzdata vips imagemagick \
     && addgroup -g "${GID}" ruby \
     && adduser -D -u "${UID}" -G ruby ruby \
     && chown ruby:ruby -R /app

@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   resources :addresses
 
   mount Sidekiq::Web => '/sidekiq', constraints: IsAdminConstraint
-  match '*unmatched', to: 'application#route_not_found', via: :all
+
+  get '*all', to: 'application#route_not_found', constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 end

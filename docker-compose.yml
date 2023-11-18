@@ -20,6 +20,7 @@ x-assets: &default-assets
 
 services:
   db:
+    container_name: app_db
     image: postgres:14.1-alpine
     restart: always
     environment:
@@ -31,6 +32,7 @@ services:
       - db:/var/lib/postgresql/data
 
   redis:
+    container_name: app_worker_redis
     image: 'redis:6-alpine'
     command: redis-server
     ports:
@@ -39,6 +41,7 @@ services:
       - 'redis:/data'
 
   sidekiq:
+    container_name: app_worker
     depends_on:
       - db
       - redis
@@ -51,6 +54,7 @@ services:
       - REDIS_URL_SIDEKIQ=${REDIS_URL_SIDEKIQ}
 
   web:
+    container_name: app_web
     depends_on:
       - db
       - redis
@@ -66,6 +70,7 @@ services:
       - ".env"
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     stop_grace_period: "3s"
+    stdin_open: true
     tty: true
 
   js:
@@ -74,5 +79,4 @@ services:
 
 volumes:
   db:
-    # driver: local
   redis:

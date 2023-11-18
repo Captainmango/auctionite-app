@@ -31,15 +31,11 @@ namespace :docker do
     system('docker compose up -d')
   end
 
-  task :connect, [:cont, :cmd] do |_task, args|
-    container = args[:cont]
-    command = args[:cmd]
+  task :stop do
+    desc 'Stop the local dev set up via Docker Compose'
 
-    if container
-      system("docker exec -itd #{container} #{command}")
-    else
-      puts 'container name not specified'
-    end
+    puts 'Starting local compose file'
+    system('docker compose down')
   end
 end
 

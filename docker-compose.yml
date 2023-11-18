@@ -70,6 +70,7 @@ services:
       - ".env"
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     stop_grace_period: "3s"
+    stdin_open: true
     tty: true
 
   js:

@@ -3,6 +3,7 @@
 class LotDomainObject < ApplicationDomainObject
   CannotPlaceBid = Class.new(StandardError)
   BidAmountCannotBeZero = Class.new(StandardError)
+  NoAuctionWinner = Class.new(StandardError)
 
   uses_model :lot
 
@@ -21,8 +22,15 @@ class LotDomainObject < ApplicationDomainObject
 
     winning_user = bids.order('amount DESC').first&.user
 
-    AuctionCompleteMailer.owner_email(item.owner, item)
-    AuctionCompleteMailer.winner_email(winning_user) if winning_user
+    raise NoAuctionWinner unless winning_user
+
+    if winning_user.address?
+      AuctionCompleteMailer.owner_email(item.owner, item)
+      AuctionCompleteMailer.winner_email(winning_user)
+    else
+      AuctionCompleteMailer.owner_email_winner_no_address(item.owner, item)
+      AuctionCompleteMailer.winner_email_no_address(winning_user)
+    end
 
     completed!
   end

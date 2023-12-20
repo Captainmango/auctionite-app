@@ -11,6 +11,10 @@ module HasDomainObject
       self
     end
 
+    def to_domain
+      Object.const_get(domain_class_name).new(self)
+    end
+
     def domain_class_name
       self.class.domain_class_name.to_s.classify
     end

@@ -7,6 +7,8 @@ class Lot < ApplicationRecord
   # @!method domain_tap
   #   @yieldparam [LotDomainObject]
   #   @return [self]
+  # @!method to_domain
+  #   @return [LotDomainObject]
   uses_domain_object :lot_domain_object
 
   belongs_to :item

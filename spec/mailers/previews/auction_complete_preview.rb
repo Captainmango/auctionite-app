@@ -19,4 +19,10 @@ class AuctionCompletePreview < ActionMailer::Preview
     item = Item.first
     AuctionCompleteMailer.winner_email_no_address(user, item)
   end
+
+  def owner_email_winner_no_address
+    user = User.first
+    item = Item.first
+    AuctionCompleteMailer.owner_email_winner_no_address(user, item)
+  end
 end

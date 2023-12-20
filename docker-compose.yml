@@ -45,27 +45,29 @@ services:
     depends_on:
       - db
       - redis
-    build: .
+    build:
+      context: .
+      dockerfile: "Dockerfile.dev"
     command: bundle exec sidekiq
     volumes:
       - '.:/project'
       - '/project/tmp'
-    environment:
-      - REDIS_URL_SIDEKIQ=${REDIS_URL_SIDEKIQ}
+    env_file:
+      - ".env"
 
   web:
     container_name: app_web
     depends_on:
       - db
       - redis
-    build: .
+    build:
+      context: .
+      dockerfile: "Dockerfile.dev"
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0' -e ${RAILS_ENV}"
     ports:
       - '3000:${APP_PORT:-3000}'
     volumes:
       - '.:/project'
-    environment:
-      - REDIS_URL_SIDEKIQ=${REDIS_URL_SIDEKIQ}
     env_file:
       - ".env"
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"

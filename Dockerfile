@@ -49,7 +49,7 @@ WORKDIR /project
 ARG UID=1000
 ARG GID=1000
 
-RUN apk update && apk --no-cache add bash nodejs postgresql-client tzdata vips imagemagick \
+RUN apk update && apk --no-cache add bash nodejs yarn postgresql-client tzdata vips imagemagick \
     && addgroup -g "${GID}" ruby \
     && adduser -D -u "${UID}" -G ruby ruby \
     && chown ruby:ruby -R /project
@@ -67,7 +67,8 @@ COPY --chown=ruby:ruby --from=assets /usr/local/bundle /usr/local/bundle
 COPY --chown=ruby:ruby --from=assets /project/public /public
 COPY --chown=ruby:ruby . .
 
-ENTRYPOINT ["/app/bin/entrypoint"]
+# RUN chmod 755 /project/bin/entrypoint
+ENTRYPOINT ["/project/bin/entrypoint"]
 
 EXPOSE 3000
 

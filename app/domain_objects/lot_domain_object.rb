@@ -21,6 +21,7 @@ class LotDomainObject < ApplicationDomainObject
 
     winning_user = bids.order('amount DESC').first&.user
 
+    AuctionCompleteMailer.owner_email(item.owner, item)
     AuctionCompleteMailer.winner_email(winning_user) if winning_user
 
     completed!

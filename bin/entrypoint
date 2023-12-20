@@ -11,7 +11,7 @@ cp -r /public /project
 # last built into the image. That's what the code below does.
 
 # shellcheck disable=SC2125
-manifest_files=/app/public/assets/.sprockets-manifest-*.json
+manifest_files=/project/public/assets/.sprockets-manifest-*.json
 
 if compgen -G "${manifest_files}" > /dev/null 2>&1; then
   # shellcheck disable=SC2086,SC2061

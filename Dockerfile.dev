@@ -58,9 +58,6 @@ RUN apk update && apk --no-cache add bash nodejs postgresql-client sqlite-dev gc
 
 USER ruby
 
-COPY --chown=ruby:ruby bin/ ./bin
-RUN chmod 0755 bin/*
-
 ARG RAILS_ENV="development"
 ENV RAILS_ENV="${RAILS_ENV}" \
     PATH="${PATH}:/home/ruby/.local/bin" \
@@ -69,13 +66,12 @@ ENV RAILS_ENV="${RAILS_ENV}" \
 COPY --chown=ruby:ruby --from=assets /usr/local/bundle /usr/local/bundle
 COPY --chown=ruby:ruby --from=assets /project/public /public
 COPY --chown=ruby:ruby . .
+COPY --chown=ruby:ruby bin/ ./bin
+
+RUN chmod 777 /project/bin/entrypoint
 
 RUN yarn install
 
-# Don't know if I really need this. I'm not using Sprockets or Asset Pipeline yet
-# RUN chmod 755 -R /project/bin/entrypoint
-# ENTRYPOINT ["/project/bin/entrypoint"]
-
 EXPOSE 3000
 
-CMD ["rails", "s"]
+CMD ["bin/entrypoint", "rails", "s"]

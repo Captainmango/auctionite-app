@@ -15,7 +15,7 @@ namespace :docker do
     system('docker --version')
     if $CHILD_STATUS.success?
       puts "Docker is installed. Building image #{image_name}"
-      system("docker build . -t #{image_name}")
+      system("docker build . -t #{image_name} -f Dockerfile.prod")
 
       puts 'Image has been built. Pushing to registry'
       system("docker push #{image_name}")
